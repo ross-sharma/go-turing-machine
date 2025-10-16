@@ -14,12 +14,7 @@ func ParseRunner(s string) *Runner {
 	lines := strings.Split(s, "\n")
 	lines = arrayMap(lines, strings.TrimSpace)
 	lines = arrayFilter(lines, isNotEmpty)
-
-	states := make([]*State, 0, len(lines))
-	for _, line := range lines {
-		states = append(states, parseState(line))
-	}
-
+	states := arrayMap(lines, parseState)
 	return CreateRunner(states)
 }
 

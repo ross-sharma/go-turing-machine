@@ -34,3 +34,16 @@ func TestParse4StateBusyBeaver(t *testing.T) {
 	runner.RunUntilHalt()
 	assertSymbolCount(t, runner.GetTape(), '1', 13)
 }
+
+func TestParse5StateBusyBeaver(t *testing.T) {
+	code := `
+	A 0:1RB 1:1LC
+	B 0:1RC 1:1RB
+	C 0:1RD 1:0LE
+	D 0:1LA 1:1LD
+	E 0:1R  1:0LA
+	`
+	runner := ParseRunner(code)
+	runner.RunUntilHalt()
+	assertSymbolCount(t, runner.GetTape(), '1', 4098)
+}
